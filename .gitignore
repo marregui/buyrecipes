@@ -1,0 +1,19 @@
+# Build artifacts
+.gradle
+build/
+
+# Logs
+*.log
+
+# IDE files
+*.iws
+*.iml
+*.ipr
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Database files
+data/

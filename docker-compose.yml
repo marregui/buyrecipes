@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - MICRONAUT_ENVIRONMENTS=prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/recipes/test"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  integration-test:
+    image: openjdk:17-jdk-slim
+    depends_on:
+      app:
+        condition: service_healthy
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    environment:
+      - TEST_SERVER_URL=http://app:8080
+      - DATASOURCES_DEFAULT_URL=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    command: ["./gradlew", "test", "--tests", "*IT"]
+    profiles:
+      - test

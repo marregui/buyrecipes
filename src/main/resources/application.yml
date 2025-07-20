@@ -1,0 +1,41 @@
+micronaut:
+  application:
+    name: buyrecipes
+  openapi:
+    views:
+      spec: swagger-ui.enabled=true
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+
+datasources:
+  default:
+    url: jdbc:h2:file:./data/buyrecipes;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ''
+    driverClassName: org.h2.Driver
+    dialect: H2
+    maximum-pool-size: 10
+    minimum-idle: 2
+    connection-timeout: 20000
+    idle-timeout: 300000
+    max-lifetime: 1200000
+    auto-commit: false
+    connection-test-query: SELECT 1
+
+jpa:
+  default:
+    entity-scan:
+      packages:
+        - 'co.piter.buyrecipes.entity'
+    properties:
+      hibernate.hbm2ddl.auto: update
+      hibernate.connection.isolation: 2
+      hibernate.jdbc.batch_size: 20
+      hibernate.order_inserts: true
+      hibernate.order_updates: true

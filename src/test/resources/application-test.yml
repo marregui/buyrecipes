@@ -1,0 +1,31 @@
+micronaut:
+  application:
+    name: buyrecipes-test
+  server:
+    port: -1  # random port
+
+datasources:
+  default:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+    dialect: H2
+
+jpa:
+  default:
+    entity-scan:
+      packages: 
+        - 'co.piter.buyrecipes.entity'
+    properties:
+      hibernate.hbm2ddl.auto: create-drop # recreate schema for each test
+      hibernate.show_sql: false
+      hibernate.format_sql: false
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
+
+logger:
+  levels:
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+    co.piter.buyrecipes: INFO
+    io.micronaut: WARN

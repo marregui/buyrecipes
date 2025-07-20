@@ -1,0 +1,75 @@
+[versions]
+micronautGradlePlugin = "4.5.4"
+micronautFramework = "4.9.1"
+h2 = "2.3.232"
+snakeyaml = "2.0"
+swagger-annotations = "2.2.34"
+logback = "1.5.18"
+jetbrains-annotations = "26.0.2"
+junit-bom = "5.13.3"
+assertj = "3.27.2"
+mockito = "5.14.2"
+
+[libraries]
+micronaut-inject-java = { module = "io.micronaut:micronaut-inject-java" }
+micronaut-http-validation = { module = "io.micronaut:micronaut-http-validation" }
+micronaut-runtime = { module = "io.micronaut:micronaut-runtime" }
+micronaut-http-server-netty = { module = "io.micronaut:micronaut-http-server-netty" }
+micronaut-jackson-databind = { module = "io.micronaut:micronaut-jackson-databind" }
+micronaut-http-client = { module = "io.micronaut:micronaut-http-client" }
+micronaut-data-processor = { module = "io.micronaut.data:micronaut-data-processor" }
+micronaut-data-hibernate-jpa = { module = "io.micronaut.data:micronaut-data-hibernate-jpa" }
+micronaut-hibernate-jpa = { module = "io.micronaut.sql:micronaut-hibernate-jpa" }
+micronaut-jdbc-hikari = { module = "io.micronaut.sql:micronaut-jdbc-hikari" }
+micronaut-openapi = { module = "io.micronaut.openapi:micronaut-openapi" }
+micronaut-test-junit5 = { module = "io.micronaut.test:micronaut-test-junit5" }
+
+# 3rd party
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
+h2-database = { module = "com.h2database:h2", version.ref = "h2" }
+snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+swagger-annotations = { module = "io.swagger.core.v3:swagger-annotations", version.ref = "swagger-annotations" }
+
+# test
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit-bom" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+
+[bundles]
+micronaut-processors = [
+    "micronaut-inject-java",
+    "micronaut-http-validation", 
+    "micronaut-data-processor",
+    "micronaut-openapi"
+]
+
+micronaut-core = [
+    "micronaut-runtime",
+    "micronaut-http-server-netty",
+    "micronaut-jackson-databind"
+]
+
+micronaut-data = [
+    "micronaut-data-hibernate-jpa",
+    "micronaut-hibernate-jpa", 
+    "micronaut-jdbc-hikari"
+]
+
+runtime = [
+    "h2-database",
+    "snakeyaml",
+    "logback-classic"
+]
+
+testing = [
+    "micronaut-test-junit5",
+    "junit-jupiter",
+    "micronaut-http-client",
+    "assertj-core",
+    "mockito-core"
+]
+
+[plugins]
+micronaut-application = { id = "io.micronaut.application", version.ref = "micronautGradlePlugin" }
